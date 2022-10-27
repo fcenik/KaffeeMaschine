@@ -17,8 +17,7 @@ public class KaffeMaschineStartSeite {
 
     static void initUI(){
 
-//        FlatLightLaf.setup();
-        FlatDarkLaf.setup();
+        FlatLightLaf.setup();
 
         JFrame frame = new JFrame("Kaffee Maschine");
         JPanel jPanel = new JPanel();
