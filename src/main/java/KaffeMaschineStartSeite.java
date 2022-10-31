@@ -1,10 +1,7 @@
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class KaffeMaschineStartSeite {
@@ -31,12 +28,7 @@ public class KaffeMaschineStartSeite {
         jPanel.add(jButton2, "grow, wrap");
         jPanel.add(jButton3, "grow, wrap");
 
-        jButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new JDialog(frame, "Button Click" );
-            }
-        });
+        jButton1.addActionListener(e -> new JDialog(frame, "Button Click" ));
 
         frame.add("Center", jPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
