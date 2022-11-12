@@ -1,10 +1,12 @@
+package panels;
+
 import com.formdev.flatlaf.FlatLightLaf;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
 
-public class KaffeMaschineStartSeite {
+public class CoffeeAutomat {
 
 
     public static void main(String[] args) {
@@ -15,6 +17,26 @@ public class KaffeMaschineStartSeite {
     static void initUI(){
 
         FlatLightLaf.setup();
+
+        JMenuBar menuBar= new JMenuBar();
+
+        JMenu userMenu= new JMenu("User");
+        JMenu coffeeMenu= new JMenu("Coffee");
+
+        JMenuItem addNewUser= new JMenuItem("Add new User");
+        JMenuItem deleteUser= new JMenuItem("Delete User");
+
+        JMenuItem addNewCoffee= new JMenuItem("Add new Coffee");
+        JMenuItem deleteCoffee= new JMenuItem("Delete Coffee");
+
+        userMenu.add(addNewUser);
+        userMenu.add(deleteUser);
+
+        coffeeMenu.add(addNewCoffee);
+        coffeeMenu.add(deleteCoffee);
+
+        menuBar.add(userMenu);
+        menuBar.add(coffeeMenu);
 
         JFrame frame = new JFrame("Kaffee Maschine");
         JPanel jPanel = new JPanel();
@@ -30,6 +52,7 @@ public class KaffeMaschineStartSeite {
 
         jButton1.addActionListener(e -> new JDialog(frame, "Button Click" ));
 
+        frame.setJMenuBar(menuBar);
         frame.add("Center", jPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack(); // give a suitable size to window automatically
