@@ -1,17 +1,47 @@
 package panels;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import entities.CoffeeEntity;
 import net.miginfocom.swing.MigLayout;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.swing.*;
+import java.util.List;
 
 
 public class CoffeeAutomat {
 
 
-    public static void main(String[] args) {
+    private static final String PERSISTENCE_UNIT_NAME = "persistenceUnitName";
+    private static EntityManagerFactory factory;
+
+
+    public static void main(String[] args) throws InterruptedException {
 
         initUI();
+
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager em = factory.createEntityManager();
+
+        em.getTransaction().begin();
+        CoffeeEntity coffeeEntity = new CoffeeEntity();
+        coffeeEntity.setCoffeeName("Kahve");
+        em.persist(coffeeEntity);
+        em.getTransaction().commit();
+
+
+        Query q = em.createQuery("select t from CoffeeEntity t");
+        List<CoffeeEntity> coffeeEntities = q.getResultList();
+        for (CoffeeEntity coffee : coffeeEntities) {
+            System.out.println(coffee);
+        }
+        System.out.println("Size: " + coffeeEntities.size());
+
+        em.close();
+
     }
 
     static void initUI(){
@@ -23,10 +53,10 @@ public class CoffeeAutomat {
         JMenu userMenu= new JMenu("User");
         JMenu coffeeMenu= new JMenu("Coffee");
 
-        JMenuItem addNewUser= new JMenuItem("Add new User");
+        JMenuItem addNewUser= new JMenuItem("Add User");
         JMenuItem deleteUser= new JMenuItem("Delete User");
 
-        JMenuItem addNewCoffee= new JMenuItem("Add new Coffee");
+        JMenuItem addNewCoffee= new JMenuItem("Add Coffee");
         JMenuItem deleteCoffee= new JMenuItem("Delete Coffee");
 
         userMenu.add(addNewUser);
@@ -59,5 +89,7 @@ public class CoffeeAutomat {
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+
     }
 }
